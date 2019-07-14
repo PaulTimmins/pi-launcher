@@ -66,6 +66,6 @@ def main():
 
 pid = "/tmp/fireproxy.pid"
 daemon = Daemonize(app="fire_proxy", pid=pid, action=main)
-#daemon.start()
+daemon.start()
 
 main()
