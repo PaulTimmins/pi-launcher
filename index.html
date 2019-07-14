@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<body>
+<div id="demo"></div>
+<div id="page" style="width:100vw;height:auto;position:absolute;left:0;right:0">
+<h1>Launch System</h1>
+<button type="button" onclick="fire(1)" style="height:200px;width:200px;font-size:24pt">1</button>
+<button type="button" onclick="fire(2)" style="height:200px;width:200px;font-size:24pt">2</button>
+<button type="button" onclick="fire(3)" style="height:200px;width:200px;font-size:24pt">3</button>
+<button type="button" onclick="fire(4)" style="height:200px;width:200px;font-size:24pt">4</button>
+<button type="button" onclick="fire(5)" style="height:200px;width:200px;font-size:24pt">5</button>
+<button type="button" onclick="fire(6)" style="height:200px;width:200px;font-size:24pt">6</button>
+<button type="button" onclick="fire(7)" style="height:200px;width:200px;font-size:24pt">7</button>
+<button type="button" onclick="fire(8)" style="height:200px;width:200px;font-size:24pt">8</button>
+</div>
+<script>
+function fire(launchnumber) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML =
+      this.responseText;
+    }
+  };
+  xhttp.open("GET", "http://"+location.hostname+":9001/fire/"+launchnumber, true);
+  xhttp.send();
+}
+</script>
+
+</body>
+</html>
