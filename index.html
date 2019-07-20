@@ -1,31 +1,120 @@
 <!DOCTYPE html>
 <html>
-<body>
-<div id="demo"></div>
-<div id="page" style="width:100vw;height:auto;position:absolute;left:0;right:0">
-<h1>Launch System</h1>
-<button type="button" onclick="fire(1)" style="height:200px;width:200px;font-size:24pt">1</button>
-<button type="button" onclick="fire(2)" style="height:200px;width:200px;font-size:24pt">2</button>
-<button type="button" onclick="fire(3)" style="height:200px;width:200px;font-size:24pt">3</button>
-<button type="button" onclick="fire(4)" style="height:200px;width:200px;font-size:24pt">4</button>
-<button type="button" onclick="fire(5)" style="height:200px;width:200px;font-size:24pt">5</button>
-<button type="button" onclick="fire(6)" style="height:200px;width:200px;font-size:24pt">6</button>
-<button type="button" onclick="fire(7)" style="height:200px;width:200px;font-size:24pt">7</button>
-<button type="button" onclick="fire(8)" style="height:200px;width:200px;font-size:24pt">8</button>
-</div>
+<head>
+<title>Launch System</title>
 <script>
 function fire(launchnumber) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("demo").innerHTML =
-      this.responseText;
+      document.getElementById("demo").innerHTML = this.responseText;
     }
   };
   xhttp.open("GET", "http://"+location.hostname+":9001/fire/"+launchnumber, true);
   xhttp.send();
 }
+
+function arm(change) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var obj = JSON.parse(this.responseText);
+      document.getElementById("demo").innerHTML = 'Arm Check Complete - '+obj.armed; //this.responseText;
+      if (obj.armed == 'off') {
+              document.getElementById("arm").disabled=false;
+              document.getElementById("disarm").disabled=true;
+      } else {
+              document.getElementById("arm").disabled=true;
+              document.getElementById("disarm").disabled=false;
+      };
+    }
+  };
+  if (change == -1) {
+        xhttp.open("GET", "http://"+location.hostname+":9001/isarmed", true);
+        };
+  if (change == 0) {
+        xhttp.open("GET", "http://"+location.hostname+":9001/disarm", true);
+        };
+  if (change == 1) {
+        xhttp.open("GET", "http://"+location.hostname+":9001/arm", true);
+        };
+  xhttp.send();
+}
+
+function test() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("demo").innerHTML = 'Test Complete'; //this.responseText;
+      var obj = JSON.parse(this.responseText);
+        if (obj.message) {
+                document.getElementById("demo").innerHTML = obj.message;
+                };
+        if (obj.x1 == 1) {
+                document.getElementById("button1").style.background='green';
+                } else {
+                document.getElementById("button1").style.background='red';
+        };
+        if (obj.x2 == 1) {
+                document.getElementById("button2").style.background='green';
+                } else {
+                document.getElementById("button2").style.background='red';
+        };
+        if (obj.x3 == 1) {
+                document.getElementById("button3").style.background='green';
+                } else {
+                document.getElementById("button3").style.background='red';
+        };
+        if (obj.x4 == 1) {
+                document.getElementById("button4").style.background='green';
+                } else {
+                document.getElementById("button4").style.background='red';
+        };
+        if (obj.x5 == 1) {
+                document.getElementById("button5").style.background='green';
+                } else {
+                document.getElementById("button5").style.background='red';
+        };
+        if (obj.x6 == 1) {
+                document.getElementById("button6").style.background='green';
+                } else {
+                document.getElementById("button6").style.background='red';
+        };
+        if (obj.x7 == 1) {
+                document.getElementById("button7").style.background='green';
+                } else {
+                document.getElementById("button7").style.background='red';
+        };
+        if (obj.x8 == 1) {
+                document.getElementById("button8").style.background='green';
+                } else {
+                document.getElementById("button8").style.background='red';
+        };
+    }
+  };
+  xhttp.open("GET", "http://"+location.hostname+":9001/test", true);
+  xhttp.send();
+}
+
+
 </script>
+</head>
+<body onLoad="arm(-1)">
+<div id="demo"></div>
+<div id="page" style="width:100vw;height:auto;position:absolute;left:0;right:0">
+<h1>Launch System</h1>
+<button type="button" onclick="test()" style="height:200px;width:200px;font-size:24pt">Continuity Test</button>
+<button id="arm" type="button" onclick="arm(1)" style="height:200px;width:200px;font-size:24pt">ARM</button>
+<button id="disarm" type="button" onclick="arm(0)" style="height:200px;width:200px;font-size:24pt">DISARM</button><br/>
+<button id="button1" type="button" onclick="fire(1)" style="height:200px;width:200px;font-size:24pt">1</button>
+<button id="button2" type="button" onclick="fire(2)" style="height:200px;width:200px;font-size:24pt">2</button>
+<button id="button3" type="button" onclick="fire(3)" style="height:200px;width:200px;font-size:24pt">3</button>
+<button id="button4" type="button" onclick="fire(4)" style="height:200px;width:200px;font-size:24pt">4</button>
+<button id="button5" type="button" onclick="fire(5)" style="height:200px;width:200px;font-size:24pt">5</button>
+<button id="button6" type="button" onclick="fire(6)" style="height:200px;width:200px;font-size:24pt">6</button>
+<button id="button7" type="button" onclick="fire(7)" style="height:200px;width:200px;font-size:24pt">7</button>
+<button id="button8" type="button" onclick="fire(8)" style="height:200px;width:200px;font-size:24pt">8</button>
+</div>
 
 </body>
 </html>
