@@ -47,7 +47,7 @@ def gpiomap(pin=0):
 
 def arm():
     global armed
-   #check continuity sense pin when we have that wired up :D
+   #check arm sense pin when we have that wired up :D
    #if armswitch.is_pressed:
     for n in (1,2,3,4,5,6,7,8):
      firepin = gpiomap(n)
