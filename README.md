@@ -2,6 +2,8 @@ add iwconfig wlan0 power off to /etc/rc.local
 
 apt-get install lightttpd python3-gpiozero python3-aiohttp python3-daemonize
 
-cp index.html /var/www/html/index.html
+cp index.html /var/www/html/index.html (or change permissions and ln to it)
+
+add /root/pi-launcher/fireproxy.py to /etc/rc.local
 
 https://blog.thewalr.us/2017/09/26/raspberry-pi-zero-w-simultaneous-ap-and-managed-mode-wifi/
